@@ -5,12 +5,13 @@
   "version": "0.2.0",
   "configurations": [
       {
-        "name": "Launch TODO CMD",
+        "name": "filesystem walk",
         "type": "go",
         "request": "launch",
         "mode": "auto",
         "cwd": "${workspaceRoot}",
-        "program": "./interacting/todo/cmd/todo",
+        "program": "./walk/",
+        "args": [],
         "env": {},
         "showLog": true
       },
