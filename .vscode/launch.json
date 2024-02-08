@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
       {
-        "name": "filesystem walk",
+        "name": "filesystem run",
         "type": "go",
         "request": "launch",
         "mode": "auto",
@@ -16,7 +16,7 @@
         "showLog": true
       },
       {
-        "name": "CMDGO Test Current File",
+        "name": "filesystem Test Current File",
         "type": "go",
         "request": "launch",
         "mode": "test",
