@@ -16,6 +16,8 @@ type config struct {
 	del  bool
 	//log destination writer
 	wLog io.Writer
+	//archive dir
+	archive string
 }
 
 func main() {
@@ -26,6 +28,7 @@ func main() {
 
 	ext := flag.String("ext", "", "File extension to filter out")
 	size := flag.Int64("size", 0, "Min file size")
+	archive := flag.String("archive", "", "Archive directory")
 	flag.Parse()
 
 	var (
@@ -43,11 +46,12 @@ func main() {
 	}
 
 	c := config{
-		ext:  *ext,
-		size: *size,
-		list: *list,
-		del:  *del,
-		wLog: f,
+		ext:     *ext,
+		size:    *size,
+		list:    *list,
+		del:     *del,
+		wLog:    f,
+		archive: *archive,
 	}
 
 	if err := run(*root, os.Stdout, c); err != nil {
@@ -73,6 +77,12 @@ func run(root string, out io.Writer, cfg config) error {
 
 		if cfg.del {
 			return delFile(path, delLogger)
+		}
+
+		if cfg.archive != "" {
+			if err := archiveFile(cfg.archive, root, path); err != nil {
+				return err
+			}
 		}
 
 		return listFile(path, out)
